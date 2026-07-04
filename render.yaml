@@ -43,17 +43,14 @@ services:
     healthCheckPath: /api/v1/health
     autoDeploy: false
 
-staticSites:
-  # Frontend (static site)
+  # Frontend (static site served as web service with Node)
   - type: web
     name: citadel-marketing-frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    runtime: node
+    plan: starter
     rootDir: frontend
-    headers:
-      - path: /*
-        name: X-Frame-Options
-        value: DENY
+    buildCommand: npm install && npm run build
+    startCommand: npx serve dist -s -l $PORT
     routes:
       - type: rewrite
         source: /api/*
