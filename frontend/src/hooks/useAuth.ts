@@ -6,6 +6,7 @@ export function useAuth() {
   const login = useCallback((newToken: string) => {
     localStorage.setItem('citadel_token', newToken);
     setToken(newToken);
+    window.location.reload();
   }, []);
 
   const logout = useCallback(() => {
