@@ -3,7 +3,7 @@ services:
   - type: web
     name: citadel-marketing-platform
     runtime: python
-    plan: starter
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
@@ -40,24 +40,25 @@ services:
         value: 5000
       - key: PYTHON_VERSION
         value: 3.13.14
-    healthCheckPath: /api/v1/health
     autoDeploy: false
 
   # Frontend (static site served as web service with Node)
   - type: web
     name: citadel-marketing-frontend
     runtime: node
-    plan: starter
+    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npx serve dist -s -l $PORT
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
+      - key: VITE_API_URL
+        value: https://citadel-marketing-platform.onrender.com
     autoDeploy: false
 
 databases:
   - name: citadel-marketing-db
-    plan: starter
+    plan: free
     databaseName: citadel_marketing
     user: citadel
