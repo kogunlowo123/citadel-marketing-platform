@@ -3,7 +3,7 @@ services:
   - type: web
     name: citadel-marketing-platform
     runtime: python
-    plan: free
+    plan: starter
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
@@ -43,14 +43,13 @@ services:
     healthCheckPath: /api/v1/health
     autoDeploy: false
 
+staticSites:
   # Frontend (static site)
   - type: web
     name: citadel-marketing-frontend
-    runtime: static
-    plan: free
-    rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    rootDir: frontend
     headers:
       - path: /*
         name: X-Frame-Options
@@ -69,6 +68,6 @@ services:
 
 databases:
   - name: citadel-marketing-db
-    plan: free
+    plan: starter
     databaseName: citadel_marketing
     user: citadel
