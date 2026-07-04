@@ -1,5 +1,5 @@
 services:
-  # Backend API
+  # Backend API (uses SQLite — no separate database needed on free tier)
   - type: web
     name: citadel-marketing-platform
     runtime: python
@@ -8,10 +8,6 @@ services:
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: citadel-marketing-db
-          property: connectionString
       - key: RESEND_API_KEY
         sync: false
       - key: ANTHROPIC_API_KEY
@@ -42,7 +38,7 @@ services:
         value: 3.13.14
     autoDeploy: false
 
-  # Frontend (static site served as web service with Node)
+  # Frontend
   - type: web
     name: citadel-marketing-frontend
     runtime: node
@@ -56,9 +52,3 @@ services:
       - key: VITE_API_URL
         value: https://citadel-marketing-platform.onrender.com
     autoDeploy: false
-
-databases:
-  - name: citadel-marketing-db
-    plan: free
-    databaseName: citadel_marketing
-    user: citadel
