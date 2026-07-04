@@ -1,0 +1,14 @@
+{
+  "name": "Monthly Contact Cleanup",
+  "description": "Remove inactive contacts and maintain list hygiene",
+  "trigger_type": "date_trigger",
+  "trigger_config": {"day_of_month": 15, "hour": 2, "timezone": "UTC"},
+  "steps": [
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_empty", "true_step": 1, "false_step": 5}},
+    {"step_type": "send_email", "config": {"subject": "We miss you at Citadel Cloud", "template": "re_engagement"}},
+    {"step_type": "wait", "config": {"duration_hours": 336}},
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_not_empty", "true_step": 4, "false_step": 5}},
+    {"step_type": "add_tag", "config": {"tag": "re_engaged"}},
+    {"step_type": "update_field", "config": {"field": "status", "value": "cleaned"}}
+  ]
+}

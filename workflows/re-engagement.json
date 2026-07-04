@@ -1,0 +1,13 @@
+{
+  "name": "Re-engagement Campaign",
+  "description": "Trigger when contact engagement score drops below 20",
+  "trigger_type": "segment_entered",
+  "trigger_config": {"segment_rule": {"field": "engagement_score", "operator": "less_than", "value": 20}},
+  "steps": [
+    {"step_type": "send_email", "config": {"subject": "We have something special for you", "template": "re_engage_offer"}},
+    {"step_type": "wait", "config": {"duration_hours": 168}},
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_not_empty", "true_step": 3, "false_step": 4}},
+    {"step_type": "add_tag", "config": {"tag": "re_engaged"}},
+    {"step_type": "add_tag", "config": {"tag": "inactive"}}
+  ]
+}

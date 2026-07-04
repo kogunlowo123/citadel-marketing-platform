@@ -1,0 +1,16 @@
+{
+  "name": "Post-Campaign Follow-up",
+  "description": "Engagement-based follow-up after a campaign is sent",
+  "trigger_type": "campaign_sent",
+  "trigger_config": {},
+  "steps": [
+    {"step_type": "wait", "config": {"duration_hours": 72}},
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_not_empty", "true_step": 2, "false_step": 3}},
+    {"step_type": "send_email", "config": {"subject": "Thanks for reading — here's your next step", "template": "followup_engaged"}},
+    {"step_type": "send_email", "config": {"subject": "You might have missed this", "template": "followup_resend_new_subject"}},
+    {"step_type": "wait", "config": {"duration_hours": 168}},
+    {"step_type": "condition", "config": {"field": "engagement_score", "operator": "greater_than", "value": 30, "true_step": 6, "false_step": 7}},
+    {"step_type": "add_tag", "config": {"tag": "high_engagement"}},
+    {"step_type": "add_tag", "config": {"tag": "needs_nurture"}}
+  ]
+}

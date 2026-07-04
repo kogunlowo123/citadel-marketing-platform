@@ -1,0 +1,16 @@
+{
+  "name": "Welcome Series",
+  "description": "3-email welcome sequence for new contacts imported via CSV",
+  "trigger_type": "csv_import",
+  "trigger_config": {"on_new_contact": true},
+  "steps": [
+    {"step_type": "send_email", "config": {"subject": "Welcome to Citadel Cloud Management", "template": "welcome_1", "delay_minutes": 0}},
+    {"step_type": "wait", "config": {"duration_hours": 72}},
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_not_empty", "true_step": 3, "false_step": 4}},
+    {"step_type": "send_email", "config": {"subject": "Your Cloud Learning Path Awaits", "template": "welcome_2_engaged"}},
+    {"step_type": "send_email", "config": {"subject": "Did you see our free courses?", "template": "welcome_2_cold"}},
+    {"step_type": "wait", "config": {"duration_hours": 168}},
+    {"step_type": "send_email", "config": {"subject": "Top Resources to Accelerate Your Cloud Career", "template": "welcome_3"}},
+    {"step_type": "add_tag", "config": {"tag": "welcome_completed"}}
+  ]
+}

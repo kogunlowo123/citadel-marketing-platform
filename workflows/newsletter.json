@@ -1,0 +1,13 @@
+{
+  "name": "Monthly Newsletter",
+  "description": "Auto-generate and send monthly newsletter from blog content",
+  "trigger_type": "date_trigger",
+  "trigger_config": {"day_of_month": 1, "hour": 9, "timezone": "America/New_York"},
+  "steps": [
+    {"step_type": "send_email", "config": {"subject": "Citadel Monthly: What's New in Cloud", "template": "newsletter_monthly", "segment": "newsletter_subscribers", "ai_generate": true, "ai_topic": "monthly cloud industry updates and Citadel new courses"}},
+    {"step_type": "wait", "config": {"duration_hours": 72}},
+    {"step_type": "condition", "config": {"field": "last_engaged_at", "operator": "is_not_empty", "true_step": 3, "false_step": 4}},
+    {"step_type": "add_tag", "config": {"tag": "newsletter_engaged"}},
+    {"step_type": "send_email", "config": {"subject": "In case you missed it...", "template": "newsletter_resend"}}
+  ]
+}
