@@ -1,0 +1,26 @@
+email,first_name,last_name,company,tags,source
+cloud.learner1@gmail.com,Alex,Chen,MWI Animal Health,cloud,newsletter
+cloud.learner2@gmail.com,Jordan,Smith,Spacelift,cloud,newsletter
+cloud.learner3@gmail.com,Sam,Williams,Ecosmic,cloud,newsletter
+cloud.learner4@gmail.com,Taylor,Johnson,Splash Tech,cloud,newsletter
+devops.pro1@gmail.com,Morgan,Davis,Citadel Cloud,cloud,newsletter
+devops.pro2@gmail.com,Casey,Miller,AWS Partner,cloud,newsletter
+devops.pro3@gmail.com,Riley,Wilson,Azure Partner,cloud,newsletter
+devops.pro4@gmail.com,Avery,Moore,GCP Partner,cloud,newsletter
+aws.cert1@outlook.com,Jamie,Taylor,Fortune 500,cloud,newsletter
+aws.cert2@outlook.com,Drew,Anderson,Defense Tech,cloud,newsletter
+azure.cert1@outlook.com,Blake,Thomas,Healthcare IT,cloud,newsletter
+azure.cert2@outlook.com,Quinn,Jackson,FinTech Corp,cloud,newsletter
+terraform.user1@yahoo.com,Skyler,White,Energy Grid,cloud,newsletter
+terraform.user2@yahoo.com,Reese,Harris,Gov Contractor,cloud,newsletter
+k8s.engineer1@proton.me,Peyton,Martin,Startup Hub,cloud,newsletter
+k8s.engineer2@proton.me,Sage,Garcia,Scale-Up,cloud,newsletter
+devsecops1@gmail.com,Hunter,Martinez,Security Firm,cloud,newsletter
+devsecops2@gmail.com,River,Robinson,Compliance Co,cloud,newsletter
+cloudbeginner1@gmail.com,Finley,Clark,Career Changer,cloud,newsletter
+cloudbeginner2@gmail.com,Hayden,Rodriguez,Bootcamp Grad,cloud,newsletter
+citadel.subscriber1@gmail.com,Sam,Ogunlowo,Citadel Cloud,newsletter,newsletter
+citadel.subscriber2@gmail.com,Kenny,Tech,Citadel Cloud,newsletter,newsletter
+citadel.subscriber3@gmail.com,Cloud,Pro,Citadel Cloud,newsletter,newsletter
+citadel.subscriber4@gmail.com,Alex,DevOps,Citadel Cloud,newsletter,newsletter
+citadel.subscriber5@gmail.com,Jordan,SRE,Citadel Cloud,newsletter,newsletter

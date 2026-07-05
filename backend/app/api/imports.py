@@ -47,8 +47,38 @@ async def upload_csv(
     db.add(job)
     await db.flush()
 
-    from app.workers.process_import import process_import_task
-    process_import_task.delay(str(job_id))
+    from app.config import get_settings
+    _settings = get_settings()
+
+    if _settings.REDIS_URL:
+        # Celery worker available — dispatch async
+        from app.workers.process_import import process_import_task
+        process_import_task.delay(str(job_id))
+    else:
+        # No Redis/Celery — run import synchronously in-process
+        import asyncio
+        import threading
+        from app.services.csv_importer import CSVImporter
+        from app.database import get_db as _get_db
+
+        async def _run_import():
+            from app.database import engine
+            from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+            session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+            async with session_factory() as import_db:
+                importer = CSVImporter()
+                await importer.import_file(
+                    file_path=str(file_path),
+                    job_id=str(job_id),
+                    column_mapping=None,
+                    tags=tags_list,
+                    db=import_db,
+                )
+
+        def _bg():
+            asyncio.run(_run_import())
+
+        threading.Thread(target=_bg, daemon=True).start()
 
     return ImportJobResponse.model_validate(job)
 
