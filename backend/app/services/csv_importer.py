@@ -1,3 +1,4 @@
+import json
 import uuid
 from datetime import datetime, timezone
 
@@ -31,8 +32,7 @@ class CSVImporter:
         db: AsyncSession,
     ) -> dict:
         """Import contacts from a CSV file."""
-        job_uuid = uuid.UUID(job_id)
-        result = await db.execute(select(ImportJob).where(ImportJob.id == job_uuid))
+        result = await db.execute(select(ImportJob).where(ImportJob.id == str(job_id)))
         job = result.scalar_one_or_none()
         if job is None:
             raise ValueError(f"ImportJob {job_id} not found")
@@ -88,7 +88,7 @@ class CSVImporter:
                 last_name=str(row.get(mapping.get("last_name", ""), "")).strip() or None,
                 phone=str(row.get(mapping.get("phone", ""), "")).strip() or None,
                 company=str(row.get(mapping.get("company", ""), "")).strip() or None,
-                tags=tags or [],
+                tags=",".join(tags) if tags else "",
                 source="csv_import",
                 status="active",
             )
@@ -109,9 +109,9 @@ class CSVImporter:
         job.skipped_count = skipped
         job.duplicate_count = duplicates
         job.error_count = len(errors)
-        job.errors = errors[:100] if errors else None
+        job.errors = json.dumps(errors[:100]) if errors else None
         job.processed_rows = len(df)
-        job.completed_at = datetime.now(timezone.utc)
+        job.completed_at = datetime.now(timezone.utc).isoformat()
         await db.flush()
         await db.commit()
 
