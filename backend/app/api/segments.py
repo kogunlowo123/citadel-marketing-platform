@@ -40,10 +40,11 @@ async def create_segment(
     db: AsyncSession = Depends(get_db),
     _user: User = Depends(get_current_user),
 ):
+    import json as _json
     segment = Segment(
         name=body.name,
         description=body.description,
-        rules=[r.model_dump() for r in body.rules],
+        rules=_json.dumps([r.model_dump() for r in body.rules]),
     )
     db.add(segment)
     await db.flush()

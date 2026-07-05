@@ -30,12 +30,13 @@ async def create_workflow(
     db: AsyncSession = Depends(get_db),
     _user: User = Depends(get_current_user),
 ):
+    import json as _json
     workflow = Workflow(
         name=body.name,
         description=body.description,
         trigger_type=body.trigger_type,
-        trigger_config=body.trigger_config,
-        steps=[s.model_dump() for s in body.steps],
+        trigger_config=_json.dumps(body.trigger_config) if body.trigger_config else None,
+        steps=_json.dumps([s.model_dump() for s in body.steps]),
     )
     db.add(workflow)
     await db.flush()
