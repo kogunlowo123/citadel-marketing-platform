@@ -54,6 +54,8 @@ async def server_error_handler(request: Request, exc):
 async def startup():
     from app.database import init_db
     await init_db()
+    from app.seed import seed_database
+    await seed_database()
     import os
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
     logger.info("citadel_marketing_platform_started", env=settings.APP_ENV, db=settings.DATABASE_URL.split("///")[0])
