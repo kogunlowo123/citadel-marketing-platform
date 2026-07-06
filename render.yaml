@@ -1,9 +1,3 @@
-databases:
-  - name: citadel-marketing-db
-    databaseName: citadel_marketing
-    user: citadel
-    plan: free
-
 services:
   - type: web
     name: citadel-marketing-platform
@@ -16,9 +10,7 @@ services:
     autoDeploy: false
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: citadel-marketing-db
-          property: connectionString
+        sync: false
       - key: REDIS_URL
         sync: false
       - key: RESEND_API_KEY
@@ -60,9 +52,7 @@ services:
     autoDeploy: false
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: citadel-marketing-db
-          property: connectionString
+        sync: false
       - key: REDIS_URL
         sync: false
       - key: APP_SECRET_KEY
@@ -90,9 +80,7 @@ services:
     autoDeploy: false
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: citadel-marketing-db
-          property: connectionString
+        sync: false
       - key: REDIS_URL
         sync: false
       - key: APP_SECRET_KEY
