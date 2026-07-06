@@ -1,5 +1,10 @@
+databases:
+  - name: citadel-marketing-db
+    databaseName: citadel_marketing
+    user: citadel
+    plan: free
+
 services:
-  # Backend API (uses SQLite — no separate database needed on free tier)
   - type: web
     name: citadel-marketing-platform
     runtime: python
@@ -7,7 +12,15 @@ services:
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    autoDeploy: false
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: citadel-marketing-db
+          property: connectionString
+      - key: REDIS_URL
+        sync: false
       - key: RESEND_API_KEY
         sync: false
       - key: ANTHROPIC_API_KEY
@@ -35,10 +48,58 @@ services:
       - key: MAX_DAILY_SENDS
         value: 5000
       - key: PYTHON_VERSION
-        value: 3.13.14
-    autoDeploy: false
+        value: 3.13.0
 
-  # Frontend
+  - type: worker
+    name: citadel-marketing-worker
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A app.workers.celery_app worker -l info -c 2 -Q default,campaigns,imports
+    autoDeploy: false
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: citadel-marketing-db
+          property: connectionString
+      - key: REDIS_URL
+        sync: false
+      - key: APP_SECRET_KEY
+        sync: false
+      - key: APP_ENV
+        value: production
+      - key: RESEND_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: APP_URL
+        value: https://citadel-marketing-platform.onrender.com
+      - key: UNSUBSCRIBE_BASE_URL
+        value: https://citadel-marketing-platform.onrender.com/api/v1/unsubscribe
+      - key: RESEND_FROM_EMAIL
+        value: noreply@mail.citadelcloudmanagement.com
+
+  - type: worker
+    name: citadel-marketing-beat
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A app.workers.celery_app beat -l info
+    autoDeploy: false
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: citadel-marketing-db
+          property: connectionString
+      - key: REDIS_URL
+        sync: false
+      - key: APP_SECRET_KEY
+        sync: false
+      - key: APP_ENV
+        value: production
+
   - type: web
     name: citadel-marketing-frontend
     runtime: node
@@ -46,9 +107,9 @@ services:
     rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npx serve dist -s -l $PORT
+    autoDeploy: false
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
       - key: VITE_API_URL
         value: https://citadel-marketing-platform.onrender.com
-    autoDeploy: false
