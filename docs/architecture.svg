@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 888 424" width="888" height="424" role="img" aria-label="citadel-marketing-platform architecture">
+<title>citadel-marketing-platform architecture</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+<rect width="888" height="424" fill="#ffffff"/>
+<text x="24" y="34" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="600" fill="#0f172a">citadel-marketing-platform</text>
+<text x="24" y="56" font-family="Segoe UI,Arial,sans-serif" font-size="13" fill="#475569">Top-level components. Stack: Python, TypeScript, HTML. Generated from the repository layout.</text>
+<rect x="24" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">backend/</text>
+<text x="38" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">54 files</text>
+<text x="38" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">Dockerfile</text>
+<text x="38" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">alembic</text>
+<text x="38" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">alembic.ini</text>
+<text x="38" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">app</text>
+<rect x="312" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">frontend/</text>
+<text x="326" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">26 files</text>
+<text x="326" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">Dockerfile</text>
+<text x="326" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">index.html</text>
+<text x="326" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">package-lock.json</text>
+<text x="326" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">package.json</text>
+<rect x="600" y="80" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="104" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">docker/</text>
+<text x="614" y="126" font-family="Consolas,monospace" font-size="12" fill="#334155">5 files</text>
+<text x="614" y="144" font-family="Consolas,monospace" font-size="12" fill="#334155">compose.yml</text>
+<text x="614" y="162" font-family="Consolas,monospace" font-size="12" fill="#334155">monitoring</text>
+<text x="614" y="180" font-family="Consolas,monospace" font-size="12" fill="#334155">nginx</text>
+<text x="614" y="198" font-family="Consolas,monospace" font-size="12" fill="#334155">postgres</text>
+<rect x="24" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="38" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">workflows/</text>
+<text x="38" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">5 files</text>
+<text x="38" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">cleanup.json</text>
+<text x="38" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">followup.json</text>
+<text x="38" y="342" font-family="Consolas,monospace" font-size="12" fill="#334155">newsletter.json</text>
+<text x="38" y="360" font-family="Consolas,monospace" font-size="12" fill="#334155">re-engagement.json</text>
+<rect x="312" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="326" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">scripts/</text>
+<text x="326" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">3 files</text>
+<text x="326" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">backup.sh</text>
+<text x="326" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">setup.sh</text>
+<text x="326" y="342" font-family="Consolas,monospace" font-size="12" fill="#334155">warmup.py</text>
+<rect x="600" y="242" width="270" height="144" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+<text x="614" y="266" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="600" fill="#0f172a">docs/</text>
+<text x="614" y="288" font-family="Consolas,monospace" font-size="12" fill="#334155">2 files</text>
+<text x="614" y="306" font-family="Consolas,monospace" font-size="12" fill="#334155">ARCHITECTURE.md</text>
+<text x="614" y="324" font-family="Consolas,monospace" font-size="12" fill="#334155">DEPLOYMENT.md</text>
+</svg>

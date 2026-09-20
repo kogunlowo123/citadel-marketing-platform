@@ -69,3 +69,8 @@ citadel-marketing-platform/
 ## License
 
 MIT — Citadel Cloud Management
+
+<!-- architecture -->
+## Architecture
+
+![Architecture diagram](docs/architecture.svg)
